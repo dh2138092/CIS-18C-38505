@@ -16,13 +16,11 @@ public class LinkedBag<T> implements BagInterface<T>
 
 	public boolean isFull() 
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public boolean isEmpty() 
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -33,6 +31,7 @@ public class LinkedBag<T> implements BagInterface<T>
 		
 		firstNode = newNode;
 		numberOfEntries++;
+		
 		return true;
 	}
 
@@ -44,6 +43,7 @@ public class LinkedBag<T> implements BagInterface<T>
 		{
 			result = firstNode.data;
 			firstNode = firstNode.next; // remove first node from chain
+			
 			numberOfEntries--;
 		}
 
@@ -135,6 +135,7 @@ public class LinkedBag<T> implements BagInterface<T>
 
 	public T[] toArray() 
 	{
+		@SuppressWarnings("unchecked")
 		T[] result = (T[])new Object[numberOfEntries];
 		
 		int index = 0;
