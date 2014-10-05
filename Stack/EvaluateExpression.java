@@ -5,8 +5,8 @@ public class EvaluateExpression
 	public static void main(String[] args) 
 	{
 		Scanner stdin = new Scanner(System.in);
-		String expression;
-		double solution;
+		String expression = "";
+		double solution = 0;
 		
 		System.out.println("Please type an arithmetic epxression");
 		System.out.println("unsigned numbers and the operators + - * /.");
