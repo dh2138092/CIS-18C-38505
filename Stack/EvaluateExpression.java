@@ -32,15 +32,34 @@ public class EvaluateExpression
 	
 	public static boolean query(Scanner input, String prompt)
 	{
-		return false;
+		String answer;
+		
+		System.out.print(prompt + " [Y or N]: ");
+		answer = input.nextLine( ).toUpperCase( );
+		
+		while (!answer.startsWith("Y") && !answer.startsWith("N"))
+		{
+			System.out.print("Invalid response. Please type Y or N: ");
+			answer = input.nextLine( ).toUpperCase( );
+		}
+		
+		return answer.startsWith("Y");
 	}
 	
 	public static double evaluate(String expression)
 	{
-		Scanner input = new Scanner(expression);
-		VectorStack<Double> numbers = new VectorStack<Double>();
-		VectorStack<Character> operations = new VectorStack<Character>();
-		String next;
-		char first;
+		BalanceChecker balanceChecker = new BalanceChecker();
+		Postfix postfix = new Postfix();
+		String postfixExpression = "";
+		double solution = 0;
+		
+		if ( balanceChecker.checkBalance(expression) )
+		{
+			postfixExpression = postfix.convertToPostfix(expression);
+			solution = postfix.evaluatePostfix(postfixExpression);
+			
+		}
+		
+		return solution;
 	}
 }
