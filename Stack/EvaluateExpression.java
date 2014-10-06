@@ -32,15 +32,40 @@ public class EvaluateExpression
 	
 	public static boolean query(Scanner input, String prompt)
 	{
-		return false;
+		String answer;
+		
+		System.out.print(prompt + " [Y or N]: ");
+		answer = input.nextLine( ).toUpperCase( );
+		
+		while (!answer.startsWith("Y") && !answer.startsWith("N"))
+		{
+			System.out.print("Invalid response. Please type Y or N: ");
+			answer = input.nextLine( ).toUpperCase( );
+		}
+		
+		return answer.startsWith("Y");
 	}
 	
-	public static double evaluate(String expression)
+	public static double evaluate(String infix)
 	{
-		Scanner input = new Scanner(expression);
-		VectorStack<Double> numbers = new VectorStack<Double>();
-		VectorStack<Character> operations = new VectorStack<Character>();
-		String next;
-		char first;
+		System.out.println(infix);
+		BalanceChecker balanceChecker = new BalanceChecker();
+		Postfix postfix = new Postfix();
+		String expression = "";
+		double solution = 0;
+		
+		if ( true /*balanceChecker.checkBalance(infix)*/ )
+		{
+			expression = postfix.convertToPostfix(infix);
+			solution = postfix.evaluatePostfix(expression);
+			
+		}
+		else
+		{
+			System.out.println("Parentheses are unblanced! Try again...");
+			return 0;
+		}
+		
+		return solution;
 	}
 }

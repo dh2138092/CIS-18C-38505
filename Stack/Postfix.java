@@ -1,25 +1,7 @@
-import java.util.StringTokenizer;
-
 public class Postfix
 {
-	private static boolean isOperator(char c) 
-	{
-		return c == '+' || c == '-' || 
-			   c == '*' || c == '/' || c == '^' || 
-			   c == '(' || c == ')';
-	}
-
-	private static boolean isSpace(char c) 
-	{
-		return (c == ' ');
-	}
-
 	private static boolean lowerPrecedence(char operator1, char operator2) 
-	{
-		// Tell whether op1 has lower precedence than op2, where op1 is an
-		// operator on the left and op2 is an operator on the right.
-		// op1 and op2 are assumed to be operator characters (+,-,*,/,^).
-		  
+	{ 
 		switch (operator1)
 		{
 		case '+': case '-':
@@ -34,71 +16,133 @@ public class Postfix
 			return false;
 		}
 	}
-	   
+	
 	public static String convertToPostfix(String infix)
 	{
-		VectorStack operatorStack = new VectorStack();
-		char c;
-		StringTokenizer parser = new StringTokenizer(infix, "+-*/^() ", true);
-		StringBuffer postfix = new StringBuffer(infix.length());
+		System.out.println("Postfix::convertToPostfix - START");
+		StackInterface<Character> operatorStack = new VectorStack<Character>();
+		int characterCount = infix.length();
+		StringBuffer postfix = new StringBuffer(characterCount);
+		char nextCharacter = ' ';
+		System.out.println("Character count: " + characterCount);
 		
-		while ( parser.hasMoreTokens() )
-		{
-			String token = parser.nextToken();
-			c = token.charAt(0);
+		for ( int i = 0; i < characterCount; i++ )
+		{			
+			System.out.println("Postfix::convertToPostfix - for each char - START");
+			System.out.println("Character at infix[" + i + "] is " + infix.charAt(i));
+
+			nextCharacter = infix.charAt(i);
 			
-			if ( (token.length() == 1) && isOperator(c) )
-			{    				
-				while ( !operatorStack.isEmpty() && !lowerPrecedence(((String)operatorStack.peek()).charAt(0), c) )
-				{
-					// Operator on the stack does not have lower precedence, 
-					// so it goes before this one
-					postfix.append(" ").append((String)operatorStack.pop());
-				}
+			switch(nextCharacter)
+			{
+			case '1' : case '2' : case '3' : case '4' : case '5' : 		
+			case '6' : case '7' : case '8' : case '9' : case '0' :
+				postfix.append(nextCharacter);
+				break;
 				
-				if ( c == ')' ) 
+			case '^' :
+				operatorStack.push(nextCharacter);
+				break;
+				
+			case '+' : case '-' : case '*' : case '/' :
+				/*while ( !operatorStack.isEmpty() && lowerPrecedence(nextCharacter, operatorStack.peek()) )
 				{
-					// Output the remaining operators in the parenthesized part
-					String operator = (String)operatorStack.pop();
-					
-					while ( operator.charAt(0) != '(' ) 
-					{
-						postfix.append(" ").append(operator);
-						operator = (String)operatorStack.pop();  
-					}
-				}
-				else
+					postfix.append(operatorStack.pop());
+				}*/
+				operatorStack.push(nextCharacter);
+				break;
+				
+			case '(' :
+				operatorStack.push(nextCharacter);
+				break;
+
+			case ')' :
+				char topOperator = operatorStack.pop();
+				while ( topOperator != '(' )
 				{
-					// Push this operator onto the stack
-					operatorStack.push(token);
+					postfix.append(topOperator);
+					topOperator = (Character)operatorStack.pop();
 				}
+				break;
+				
+				default:
+					break;
 			}
-			else if ( (token.length() == 1) && isSpace(c) ) 
-			{
-				// Else if token was a space, 
-				// ignore it
-				;
-			}
-			else 
-			{
-				// Else it is an operand,
-				// so append operand to postfix expression
-				postfix.append(" ").append(token);  
-			}
+			
+			System.out.println("Postfix::convertToPostfix - for each char - END");
 		}
+		
+		System.out.println("Postfix::convertToPostfix - !operatorStack.isEmpty() - START");
 
 		while ( !operatorStack.isEmpty() )
 		{
-			// Output the remaining operators on the stack.
-			postfix.append(" ").append((String)operatorStack.pop());
+			char topOperator = operatorStack.pop();
+			postfix.append(topOperator);
 		}
-     
-        // Return the result (a postfix expression)
+		
+		System.out.println("Postfix::convertToPostfix - !operatorStack.isEmpty() - END");
+		
+		System.out.println("Final postfix expression: " + postfix.toString());
+		System.out.println("Postfix::convertToPostfix - END");
         return postfix.toString();
 	}
 	
-	public static int evaluatePostfix()
+	public static double evaluatePostfix(String postfix)
 	{
-		return 0;
+		StackInterface<Double> valueStack = new VectorStack<Double>();
+		int characterCount = postfix.length();
+		char nextCharacter = ' ';
+		double number = 0;
+		double operandTwo = 0;
+		double operandOne = 0;
+		double result = 0;
+		
+		for ( int i = 0; i < characterCount; i++ )
+		{
+			nextCharacter = postfix.charAt(i);
+			
+			switch(nextCharacter)
+			{
+			case '1' : case '2' : case '3' : case '4' : case '5' :
+			case '6' : case '7' : case '8' : case '9' : case '0' :
+				number = Character.getNumericValue(nextCharacter);
+				valueStack.push(number);
+				break;
+				
+			case '+' : case '-' : case '*' : case '/' : case '^' :
+				operandTwo = valueStack.pop();
+				operandOne = valueStack.pop();
+				switch(nextCharacter)
+				{
+				case '+' :
+				    result = operandOne + operandTwo;
+					break;
+				case '-' :
+					result = operandOne - operandTwo;
+					break;
+					
+				case '*' :
+					result = operandOne * operandTwo;
+					break;
+					
+				case '/' :
+					result = operandOne / operandTwo;
+					break;
+					
+				case '^':
+					result = Math.pow(operandOne, operandTwo);
+					break;
+					
+					default: break;
+				}
+				valueStack.push(result);
+				break;
+				
+			default: break;
+				
+			}
+		}
+		
+		return valueStack.peek();
 	}
 }

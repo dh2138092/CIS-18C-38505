@@ -3,20 +3,20 @@ import java.util.Vector;
 public class VectorStack < T > implements StackInterface < T >
 {
 
-    private Vector <T> stack; // last element is the top entry in stack
+    private Vector <T> stack;
 
     private static final int DEFAULT_INITIAL_CAPACITY = 50;
 
     public VectorStack()
     {
         this (DEFAULT_INITIAL_CAPACITY);
-    } // end default constructor
+    }
 
 
     public VectorStack(int initialCapacity)
     {
-        stack = new Vector < T > (initialCapacity); // size doubles as needed
-    } // end constructor
+        stack = new Vector <T> (initialCapacity);
+    }
 
 
     public void push(T newEntry)
@@ -42,7 +42,7 @@ public class VectorStack < T > implements StackInterface < T >
     {
     	T top = null;
     	
-    	if ( ! isEmpty() )
+    	if ( !isEmpty() )
     	{
     		top = stack.lastElement();
     	}
@@ -51,10 +51,13 @@ public class VectorStack < T > implements StackInterface < T >
     }
     
 
-    public boolean isEmpty (){ return false;}
+    public boolean isEmpty ()
+    { 
+    	return stack.isEmpty(); 
+    }
 
-    public void clear (){}
-    /* Implementations of the stack operations go here. 
-    . . .  */
-
-} // end VectorStack
+    public void clear ()
+    {
+    	stack.clear();
+    }
+}
