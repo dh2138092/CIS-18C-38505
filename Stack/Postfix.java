@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-import java.util.Scanner;
-import java.util.StringTokenizer;
-
->>>>>>> 7701477e5aae03de2b61d56b9138020143ae46ad
 public class Postfix
 {
 	private static boolean lowerPrecedence(char operator1, char operator2) 
@@ -25,7 +19,6 @@ public class Postfix
 	
 	public static String convertToPostfix(String infix)
 	{
-<<<<<<< HEAD
 		System.out.println("Postfix::convertToPostfix - START");
 		StackInterface<Character> operatorStack = new VectorStack<Character>();
 		int characterCount = infix.length();
@@ -56,34 +49,6 @@ public class Postfix
 				{
 					postfix.append(operatorStack.pop());
 				}*/
-=======
-		StackInterface<Character> operatorStack = new VectorStack<Character>();
-		char nextCharacter;
-		StringTokenizer parser = new StringTokenizer(infix);
-		StringBuffer postfix = new StringBuffer(infix.length());
-		
-		while ( parser.hasMoreTokens() )
-		{
-			String token = parser.nextToken();
-			nextCharacter = token.charAt(0);
-			
-			switch(nextCharacter)
-			{
-			case 1 : case 2 : case 3 : case 4 : case 5 : 		
-			case 6 : case 7 : case 8 : case 9 : case 0 :
-				postfix.append(nextCharacter);
-				break;
-				
-			case '^' :
-				operatorStack.push(nextCharacter);
-				break;
-				
-			case '+' : case '-' : case '*' : case '/' :
-				while ( !operatorStack.isEmpty() && lowerPrecedence(nextCharacter, operatorStack.peek()) )
-				{
-					postfix.append(operatorStack.pop());
-				}
->>>>>>> 7701477e5aae03de2b61d56b9138020143ae46ad
 				operatorStack.push(nextCharacter);
 				break;
 				
@@ -103,22 +68,15 @@ public class Postfix
 				default:
 					break;
 			}
-<<<<<<< HEAD
 			
 			System.out.println("Postfix::convertToPostfix - for each char - END");
-=======
->>>>>>> 7701477e5aae03de2b61d56b9138020143ae46ad
 		}
 		
 		System.out.println("Postfix::convertToPostfix - !operatorStack.isEmpty() - START");
 
 		while ( !operatorStack.isEmpty() )
 		{
-<<<<<<< HEAD
 			char topOperator = operatorStack.pop();
-=======
-			char topOperator = (Character)operatorStack.pop();
->>>>>>> 7701477e5aae03de2b61d56b9138020143ae46ad
 			postfix.append(topOperator);
 		}
 		
@@ -131,7 +89,6 @@ public class Postfix
 	
 	public static double evaluatePostfix(String postfix)
 	{
-<<<<<<< HEAD
 		StackInterface<Double> valueStack = new VectorStack<Double>();
 		int characterCount = postfix.length();
 		char nextCharacter = ' ';
@@ -187,39 +144,5 @@ public class Postfix
 		}
 		
 		return valueStack.peek();
-=======
-		StackInterface<Double> vals = new VectorStack<Double>();
-		StackInterface<String> ops = new VectorStack<String>();
-		String s = "";
-		Scanner input = new Scanner(postfix);
-		
-		while ( input.hasNext() )
-		{
-
-			s = input.next();
-			
-			if      (s.equals("("))               ;
-            else if (s.equals("+"))    ops.push(s);
-            else if (s.equals("-"))    ops.push(s);
-            else if (s.equals("*"))    ops.push(s);
-            else if (s.equals("/"))    ops.push(s);
-            else if (s.equals("sqrt")) ops.push(s);
-            else if (s.equals(")")) {
-                String op = ops.pop();
-                double v = vals.pop();
-                if      (op.equals("+"))    v = vals.pop() + v;
-                else if (op.equals("-"))    v = vals.pop() - v;
-                else if (op.equals("*"))    v = vals.pop() * v;
-                else if (op.equals("/"))    v = vals.pop() / v;
-                else if (op.equals("sqrt")) v = Math.sqrt(v);
-                vals.push(v);
-            }
-            else vals.push(Double.parseDouble(s));
-		}
-		
-		input.close();
-		double solution = vals.pop();
-		return solution;
->>>>>>> 7701477e5aae03de2b61d56b9138020143ae46ad
 	}
 }

@@ -48,7 +48,6 @@ public class EvaluateExpression
 	
 	public static double evaluate(String infix)
 	{
-<<<<<<< HEAD
 		System.out.println(infix);
 		BalanceChecker balanceChecker = new BalanceChecker();
 		Postfix postfix = new Postfix();
@@ -66,19 +65,6 @@ public class EvaluateExpression
 			System.out.println("Parentheses are unblanced! Try again...");
 			return 0;
 		}
-=======
-		BalanceChecker balanceChecker = new BalanceChecker();
-		Postfix postfix = new Postfix();
-		String postfixExpression = "";
-		double solution = 0;
-		
-		if ( balanceChecker.checkBalance(expression) )
-		{
-			postfixExpression = postfix.convertToPostfix(expression);
-			solution = postfix.evaluatePostfix(postfixExpression);
-			
-		}
->>>>>>> 7701477e5aae03de2b61d56b9138020143ae46ad
 		
 		return solution;
 	}
