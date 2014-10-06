@@ -9,8 +9,7 @@ public class EvaluateExpression
 		double solution = 0;
 		
 		System.out.println("Please type an arithmetic epxression");
-		System.out.println("unsigned numbers and the operators + - * /.");
-		System.out.println("THe expression must by full paranthesized");
+		System.out.println("unsigned, single digit whole numbers and the operators + - * /.");
 		
 		do
 		{
