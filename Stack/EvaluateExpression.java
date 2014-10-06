@@ -48,24 +48,24 @@ public class EvaluateExpression
 	
 	public static double evaluate(String infix)
 	{
-		System.out.println(infix);
 		BalanceChecker balanceChecker = new BalanceChecker();
 		Postfix postfix = new Postfix();
 		String expression = "";
-		double solution = 0;
+		double solution = 0.0;
 		
-		if ( true /*balanceChecker.checkBalance(infix)*/ )
+		System.out.println(infix);		
+		boolean balanced = balanceChecker.checkBalance(infix);
+		
+		if ( balanced )
 		{
 			expression = postfix.convertToPostfix(infix);
 			solution = postfix.evaluatePostfix(expression);
-			
+			return solution;
 		}
 		else
 		{
-			System.out.println("Parentheses are unblanced! Try again...");
-			return 0;
+			System.out.println("Unbalanced expression {[()]}. Try again...");
+			return -1;
 		}
-		
-		return solution;
 	}
 }

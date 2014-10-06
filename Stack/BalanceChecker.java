@@ -5,18 +5,20 @@ public class BalanceChecker
 		StackInterface<Character> openDelimiterStack = new VectorStack<Character>();
 		int characterCount = expression.length();
 		boolean isBalanced = true;
+		int index = 0;
 		char nextCharacter = ' ';
 		
-		for ( int i = 0; isBalanced && (i < characterCount); i++ )
+		for ( ; isBalanced && (index < characterCount); index++ )
 		{
-			nextCharacter = expression.charAt(i);
+			nextCharacter = expression.charAt(index);
 			
 			switch (nextCharacter)
 			{
-			case '(': case '[': case '{':
+			case '(' : case '[' : case '{' :
 				openDelimiterStack.push(nextCharacter);
 				break;
-			case ')': case ']': case '}':
+				
+			case ')' : case ']' : case '}' :
 				if ( openDelimiterStack.isEmpty() )
 				{
 					isBalanced = false;
@@ -27,12 +29,16 @@ public class BalanceChecker
 					isBalanced = isPaired(openDelimiter, nextCharacter);
 				}
 				break;
-			default:
-				break;
+				
+			default: break;
 			} 
 		}
 		
-		isBalanced = false;
+		if ( !openDelimiterStack.isEmpty() )
+		{
+			isBalanced = false;
+		}
+		
 		return isBalanced;
 	}
 	

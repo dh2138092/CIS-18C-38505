@@ -6,12 +6,16 @@ public class Postfix
 		{
 		case '+': case '-':
 			return !(operator2 == '+' || operator2 == '-');
+			
 		case '*': case '/':
 			return operator2 == '^' || operator2 == '(';
+			
 		case '^':
 			return operator2 == '(';
+			
 		case '(': 
 			return true;
+			
 		default:
 			return false;
 		}
@@ -19,7 +23,7 @@ public class Postfix
 	
 	public static String convertToPostfix(String infix)
 	{
-		System.out.println("Postfix::convertToPostfix - START");
+		//System.out.println("Postfix::convertToPostfix - START");
 		StackInterface<Character> operatorStack = new VectorStack<Character>();
 		int characterCount = infix.length();
 		StringBuffer postfix = new StringBuffer(characterCount);
@@ -28,8 +32,8 @@ public class Postfix
 		
 		for ( int i = 0; i < characterCount; i++ )
 		{			
-			System.out.println("Postfix::convertToPostfix - for each char - START");
-			System.out.println("Character at infix[" + i + "] is " + infix.charAt(i));
+			//System.out.println("Postfix::convertToPostfix - for each char - START");
+			System.out.println("infix[" + i + "]: " + infix.charAt(i));
 
 			nextCharacter = infix.charAt(i);
 			
@@ -52,11 +56,11 @@ public class Postfix
 				operatorStack.push(nextCharacter);
 				break;
 				
-			case '(' :
+			case '(' : case '[' : case '{' :
 				operatorStack.push(nextCharacter);
 				break;
 
-			case ')' :
+			case ')' : case ']' : case '}' :
 				char topOperator = operatorStack.pop();
 				while ( topOperator != '(' )
 				{
@@ -69,10 +73,10 @@ public class Postfix
 					break;
 			}
 			
-			System.out.println("Postfix::convertToPostfix - for each char - END");
+			//System.out.println("Postfix::convertToPostfix - for each char - END");
 		}
 		
-		System.out.println("Postfix::convertToPostfix - !operatorStack.isEmpty() - START");
+		//System.out.println("Postfix::convertToPostfix - !operatorStack.isEmpty() - START");
 
 		while ( !operatorStack.isEmpty() )
 		{
@@ -80,10 +84,10 @@ public class Postfix
 			postfix.append(topOperator);
 		}
 		
-		System.out.println("Postfix::convertToPostfix - !operatorStack.isEmpty() - END");
+		//System.out.println("Postfix::convertToPostfix - !operatorStack.isEmpty() - END");
 		
 		System.out.println("Final postfix expression: " + postfix.toString());
-		System.out.println("Postfix::convertToPostfix - END");
+		//System.out.println("Postfix::convertToPostfix - END");
         return postfix.toString();
 	}
 	
@@ -139,7 +143,6 @@ public class Postfix
 				break;
 				
 			default: break;
-				
 			}
 		}
 		
