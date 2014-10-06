@@ -8,7 +8,7 @@ public class Postfix
 			return !(operator2 == '+' || operator2 == '-');
 			
 		case '*': case '/':
-			return operator2 == '^' || operator2 == '(';
+			return operator2 == '^' || operator2 == '(' ;
 			
 		case '^':
 			return operator2 == '(';
@@ -49,10 +49,10 @@ public class Postfix
 				break;
 				
 			case '+' : case '-' : case '*' : case '/' :
-				/*while ( !operatorStack.isEmpty() && lowerPrecedence(nextCharacter, operatorStack.peek()) )
+				while ( !operatorStack.isEmpty() && lowerPrecedence(nextCharacter, operatorStack.peek()) )
 				{
 					postfix.append(operatorStack.pop());
-				}*/
+				}
 				operatorStack.push(nextCharacter);
 				break;
 				
