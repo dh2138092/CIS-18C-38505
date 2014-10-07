@@ -1,3 +1,9 @@
+/*
+	Author: Dylan House
+	Class: CIS-18C-38505
+	School: Norco College, Norco, CA
+*/
+
 import java.util.Scanner;
 
 public class EvaluateExpression 
