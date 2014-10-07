@@ -1,6 +1,6 @@
 import java.util.Vector;
 
-public class VectorStack < T > implements StackInterface < T >
+public class VectorStack < T extends Comparable < ? super T >> implements StackInterface < T >
 {
 
     private Vector <T> stack;
