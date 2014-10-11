@@ -10,11 +10,8 @@ public class SortArray
         {
             int indexOfNextSmallest = getIndexOfSmallest (a, index, n - 1);
             swap (a, index, indexOfNextSmallest);
-            // Assertion: a[0] <= a[1] <= . . . <= a[index] <= all other
-            // a[i]
-        } // end for
-    } // end selectionSort
-
+        }
+    }
 
     /** Finds the index of the smallest value in a portion of an array.
     @param a an array of Comparable objects
@@ -35,12 +32,11 @@ public class SortArray
             {
                 min = a [index];
                 indexOfMin = index;
-            } // end if
-            // Assertion: min is the smallest of a[first] through a[index].
-        } // end for
+            }
+        }
+        
         return indexOfMin;
-    } // end getIndexOfSmallest
-
+    }
 
     /** Swaps the array entries a[i] and a[j].
     @param a an array of objects
@@ -51,6 +47,5 @@ public class SortArray
         Object temp = a [i];
         a [i] = a [j];
         a [j] = temp;
-    } // end swap
-    
-} // end SortArray
+    }
+}
