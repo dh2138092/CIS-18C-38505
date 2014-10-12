@@ -39,14 +39,23 @@ public class SortArray
     public static <T extends Comparable <? super T>>
     void bubbleSort(T[] a, int numberOfEntries)
     {
+    	boolean swapped = true;
+    	
     	if (numberOfEntries > 0)
     	{
-	    	for (int i = 0; i < numberOfEntries - 1; i++)
+	    	for (int pass = 1; pass <= numberOfEntries && swapped; pass++)
 	    	{
-	    		for (int j = 0; j < numberOfEntries - 1; j++)
+	    		swapped = false;
+	    		
+	    		for (int j = 0; j < numberOfEntries - pass; j++)
 	    		{
-	    			int indexOfSmallest = getIndexOfSmallest(a, i, j + 1);
-	    			swap(a, i, indexOfSmallest);
+	    			int indexOfSmallest = getIndexOfSmallest(a, j, j + 1);
+	    			
+	    			if (indexOfSmallest > j)
+	    			{
+		    			swap(a, j, indexOfSmallest);
+		    			swapped = true;
+	    			}
 	    		}
 	    	}
     	}
@@ -56,11 +65,7 @@ public class SortArray
     public static <T extends Comparable <? super T>>
     void bubbleSort(T[] a, int first, int last)
     {
-    	if (first < last && last > 0)
-    	{
 
-    	}
-    	else return;
     }
 
     /** Finds the index of the smallest value in a portion of an array.

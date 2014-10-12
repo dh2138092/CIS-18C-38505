@@ -2,7 +2,7 @@ public class TestSort
 {
 	public static void main(String[] args)
 	{
-		String[] a = new String[] { "Jay", "Jack", "Robert", "Adam", "Susan", "Eve", "Dylan", "Lauren", "Heather", "Casey" };
+		String[] a = new String[] { "Jay", "Jack", "Zeek", "Robert", "Adam", "Susan", "Eve", "Dylan", "Lauren", "Heather", "Casey" };
 		
 		SortArray.bubbleSort(a, a.length);
 		
