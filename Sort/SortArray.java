@@ -4,13 +4,17 @@ public class SortArray
     @param a an array of Comparable objects
     @param n an integer > 0 */
     public static <T extends Comparable <? super T>>
-    void selectionSort (T[] a, int numOfEntries)
+    void selectionSort (T[] a, int numberOfEntries)
     {
-        for (int index = 0 ; index < numOfEntries - 1 ; index++)
-        {
-            int indexOfNextSmallest = getIndexOfSmallest(a, index, numOfEntries - 1);
-            swap(a, index, indexOfNextSmallest);
-        }
+    	if (numberOfEntries > 0)
+    	{
+	        for (int index = 0 ; index < numberOfEntries - 1 ; index++)
+	        {
+	            int indexOfNextSmallest = getIndexOfSmallest(a, index, numberOfEntries - 1);
+	            swap(a, index, indexOfNextSmallest);
+	        }
+    	}
+    	else return;
     }
     
     /** Sorts the array entries a[first] through a[last] recursively. 
@@ -20,25 +24,43 @@ public class SortArray
     public static <T extends Comparable <? super T>>
     void selectionSort(T[] a, int first, int last)
     {
-    	if (first < last)
+    	if (first < last && last > 0)
     	{
     		int indexOfNextSmallest = getIndexOfSmallest(a, first, last - 1);
     		swap(a, first, indexOfNextSmallest);
     		selectionSort(a, first + 1, last);
     	}
+    	else return;
     }
     
-    public static < T extends Comparable < ? super T >>
-    void bubbleSort(T[] a, int n)
+    /** Sorts the first n objects in an array into ascending order.
+    @param a an array of Comparable objects
+    @param n an integer > 0 */
+    public static <T extends Comparable <? super T>>
+    void bubbleSort(T[] a, int numberOfEntries)
     {
-    	for (int i = 0; i < n - 1; i++)
+    	if (numberOfEntries > 0)
     	{
-    		for (int j = 0; j < n - 1; j++)
-    		{
-    			int indexOfSmallest = getIndexOfSmallest(a, i, j + 1);
-    			swap(a, i, indexOfSmallest);
-    		}
+	    	for (int i = 0; i < numberOfEntries - 1; i++)
+	    	{
+	    		for (int j = 0; j < numberOfEntries - 1; j++)
+	    		{
+	    			int indexOfSmallest = getIndexOfSmallest(a, i, j + 1);
+	    			swap(a, i, indexOfSmallest);
+	    		}
+	    	}
     	}
+    	else return;
+    }
+    
+    public static <T extends Comparable <? super T>>
+    void bubbleSort(T[] a, int first, int last)
+    {
+    	if (first < last && last > 0)
+    	{
+
+    	}
+    	else return;
     }
 
     /** Finds the index of the smallest value in a portion of an array.

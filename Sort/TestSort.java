@@ -2,10 +2,9 @@ public class TestSort
 {
 	public static void main(String[] args)
 	{
-		SortArray mySort = new SortArray();
-		int a[] = {1 , 5, 8, 123, 2, 23, 20};
+		String[] a = new String[] { "Jay", "Jack", "Robert", "Adam", "Susan", "Eve", "Dylan", "Lauren", "Heather", "Casey" };
 		
-		mySort.selectionSort(a, a.length);
+		SortArray.bubbleSort(a, a.length);
 		
 		for (int i = 0; i < a.length; i++)
 		{
