@@ -4,7 +4,7 @@ public class TestSort
 	{
 		String[] a = new String[] { "Jay", "Jack", "Zeek", "Robert", "Adam", "Susan", "Eve", "Dylan", "Lauren", "Heather", "Casey" };
 		
-		SortArray.bubbleSort(a, a.length);
+		SortArray.bubbleSort(a, 0, a.length);
 		
 		for (int i = 0; i < a.length; i++)
 		{
